@@ -1,12 +1,12 @@
 <template>
   <div class="p-4">
-   <h1 class="text-2xl font-bold mb-4">Customer List</h1>
-  <div class="p-4 bg-white rounded">
-    <div class="flex items-center mb-4">
-      <div class="w-3 h-6 bg-cabdff rounded"></div>
-      <h6 class="text-xl px-4">Customer</h6>
-      <div class="relative flex items-center flex-grow">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+    <h1 class="text-2xl font-bold mb-4">Customer List</h1>
+    <div v-if="!userCardVisible" class="p-4 bg-white rounded">
+      <div class="flex items-center mb-4">
+        <div class="w-3 h-6 bg-cabdff rounded"></div>
+        <h6 class="text-xl font-semibold px-4">Customer</h6>
+        <div class="relative flex items-center flex-grow">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M15 11a4 4 0 11-8 0 4 4 0 018 0z"/>
             </svg>
@@ -17,7 +17,6 @@
             class="pl-10 py-2 pr-2 bg-gray-100 rounded-lg w-96 focus:outline-none focus:shadow-outline"
             v-model="searchQuery"
           />
-          
         </div>
         <button @click="toggleActive" :class="{ 'bg-gray-200': activeSelected }" class="px-4 py-2 mx-2 rounded-md">
           Active
@@ -28,22 +27,22 @@
         <button @click="filterCustomers" class="p-2 border rounded-md hide-below-900">
           <img src="../assets/images/filter.svg" alt="filter icon" class="w-6 h-6"> 
         </button>
-    </div>
-    <table class="min-w-full bg-white rounded-lg">
-      <thead>
-        <tr :class="{'border-t': isTopBorder,'border-b hide-below-900': !isTopBorder}">
-          <th class="p-2 ">
-            <input type="checkbox" class="checkbox__tick" @click="toggleSelectAll" :checked="areAllSelected">
-          </th>
-          <th class="px-4 py-2">Name</th>
-          <th class="px-4 py-2">Email</th>
-          <th class="px-4 py-2">Purchase</th>
-          <th class="px-4 py-2">Lifetime</th>
-          <th class="px-4 py-2">Comments</th>
-          <th class="px-4 py-2">Likes</th>
-        </tr>
-      </thead>
-      <tbody>
+      </div>
+      <table class="min-w-full bg-white rounded-lg">
+        <thead>
+          <tr :class="{'border-t': isTopBorder,'border-b hide-below-900': !isTopBorder}">
+            <th class="p-2 ">
+              <input type="checkbox" class="checkbox__tick" @click="toggleSelectAll" :checked="areAllSelected">
+            </th>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">Purchase</th>
+            <th class="px-4 py-2">Lifetime</th>
+            <th class="px-4 py-2">Comments</th>
+            <th class="px-4 py-2">Likes</th>
+          </tr>
+        </thead>
+        <tbody>
           <tr v-for="customer in filteredCustomers" :key="customer.id" :class="{'border-t': isTopBorder, 'border-b': !isTopBorder}">
             <td class="p-2 hide-below-900">
               <input type="checkbox" class="checkbox__tick" :value="customer.id" v-model="selectedCustomers">
@@ -51,7 +50,7 @@
             <td class="px-4 py-2 flex items-center">
               <img :src="customer.avatar" alt="avatar" class="w-10 h-10 rounded-full mr-2" />
               <div>
-                <div class="font-bold clickable hover:text-primary">{{ customer.name }}</div>
+                <div class="font-semibold clickable hover:text-primary" @click="showUserCard(customer)">{{ customer.name }}</div>
                 <div class="text-sm text-gray-500">{{ customer.username }}</div>
               </div>
             </td>
@@ -67,11 +66,12 @@
             <td class="px-4 py-2 hide-below-900 text-gray-600">{{ customer.likes }}</td>
           </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
+    <UserCard v-if="userCardVisible" :user="selectedUser" />
   </div>
-  <UserCard v-if="userCardVisible" :user="selectedUser" />
-</div>
 </template>
+
 
 <script setup>
 import { ref, computed } from 'vue';
@@ -178,6 +178,10 @@ const filteredCustomers = computed(() => {
   );
 });
 
+const showUserCard = (customer) => {
+  selectedUser.value = customer;
+  userCardVisible.value = true;
+};
 
 const toggleActive = () => {
   activeSelected.value = true;
