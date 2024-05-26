@@ -83,7 +83,6 @@ import avatar3 from '@/assets/images/avatar-2.jpg';
 import avatar4 from '@/assets/images/avatar-2.jpg';
 import avatar5 from '@/assets/images/avatar-2.jpg';
 import avatar6 from '@/assets/images/avatar-2.jpg';
-import filtericon from '../assets/images/filter.svg';
 // Import other avatar images as needed
 
 const store = useUserDataStore();
@@ -179,11 +178,6 @@ const filteredCustomers = computed(() => {
   );
 });
 
-
-const showUserCard = (user) => {
-      selectedUser.value = user;
-      userCardVisible.value = true;
-    };
 
 const toggleActive = () => {
   activeSelected.value = true;
