@@ -10,6 +10,7 @@ module.exports = {
         'cabdff': '#CABDFF',
         '6f767e': '#6F767E',
         'primary': '#3595f6',
+        'b5e4ca':'#b5e4ca',
       },
     },
   },

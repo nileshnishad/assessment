@@ -105,7 +105,9 @@
               >
                 <td
                   class="p-2 hide-below-900"
-                  :class="{ 'bg-gray-100 ': isUserCardVisible && isSelected(customer) }"
+                  :class="{
+                    'bg-gray-100 ': isUserCardVisible && isSelected(customer),
+                  }"
                 >
                   <input
                     type="checkbox"
@@ -116,7 +118,9 @@
                 </td>
                 <td
                   class="p-2 flex items-center relative"
-                  :class="{ 'bg-gray-100':isUserCardVisible && isSelected(customer) }"
+                  :class="{
+                    'bg-gray-100': isUserCardVisible && isSelected(customer),
+                  }"
                 >
                   <img
                     :src="customer.avatar"
@@ -133,24 +137,26 @@
                     <div class="text-sm text-gray-500">
                       {{ customer.username }}
                     </div>
-                    
                   </div>
-                  <div v-if="isUserCardVisible && isSelected(customer)" :class="{ 'arrow-icon': isSelected(customer) }">
-                      <svg
-                        class="w-6 h-6 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </div>
+                  <div
+                    v-if="isUserCardVisible && isSelected(customer)"
+                    :class="{ 'arrow-icon': isSelected(customer) }"
+                  >
+                    <svg
+                      class="w-6 h-6 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
                 </td>
                 <td
                   v-if="!isUserCardVisible"
@@ -243,39 +249,39 @@ store.customers = [
     likes: 16,
     avatar: avatar1,
     purchaseHistory: [
-    {
-      id: 1,
-      product: "Product 1",
-      productImg:"temp.jpg",
-      productLink:"ui8.net/product/product-link",
-      price: 50,
-      date: "2024-05-01"
-    },
-    {
-      id: 2,
-      product: "Product 2",
-      productImg:"temp2.jpg",
-      productLink:"ui8.net/product/product-link",
-      price: 350,
-      date: "2024-05-01"
-    },
-    {
-      id: 3,
-      product: "Product 3",
-      productImg:"temp3.jpg",
-      productLink:"ui8.net/product/product-link",
-      price: 150,
-      date: "2024-05-01"
-    },
-    {
-      id: 4,
-      product: "Product 4",
-      productImg:"temp3.jpg",
-      productLink:"ui8.net/product/product-link",
-      price: 10,
-      date: "2024-05-01"
-    },
-  ]
+      {
+        id: 1,
+        product: "Product 1",
+        productImg: "product1.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 50,
+        date: "2024-04-01",
+      },
+      {
+        id: 2,
+        product: "Product 2",
+        productImg: "product2.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 35,
+        date: "2024-04-01",
+      },
+      {
+        id: 3,
+        product: "Product 3",
+        productImg: "product3.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 15,
+        date: "2024-04-01",
+      },
+      {
+        id: 4,
+        product: "Product 4",
+        productImg: "product4.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 10,
+        date: "2024-04-01",
+      },
+    ],
   },
   {
     id: 2,
@@ -284,10 +290,45 @@ store.customers = [
     email: "fahey.designer@robot.co",
     purchase: 12,
     lifetime: "$223",
+    website: "robot.co",
     change: 2.8,
     comments: 14,
     likes: 6,
     avatar: avatar2,
+    purchaseHistory: [
+      {
+        id: 1,
+        product: "Product 1",
+        productImg: "product1.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 50,
+        date: "2024-04-01",
+      },
+      {
+        id: 2,
+        product: "Product 2",
+        productImg: "product2.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 35,
+        date: "2024-04-01",
+      },
+      {
+        id: 3,
+        product: "Product 3",
+        productImg: "product3.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 15,
+        date: "2024-04-01",
+      },
+      {
+        id: 4,
+        product: "Product 4",
+        productImg: "product4.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 10,
+        date: "2024-04-01",
+      },
+    ],
   },
   {
     id: 3,
@@ -296,10 +337,45 @@ store.customers = [
     email: "john.doe@example.com",
     purchase: 5,
     lifetime: "$500",
+    website: "robot.co",
     change: 10.5,
     comments: 12,
     likes: 20,
     avatar: avatar3,
+    purchaseHistory: [
+      {
+        id: 1,
+        product: "Product 1",
+        productImg: "product1.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 50,
+        date: "2024-04-01",
+      },
+      {
+        id: 2,
+        product: "Product 2",
+        productImg: "product2.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 35,
+        date: "2024-04-01",
+      },
+      {
+        id: 3,
+        product: "Product 3",
+        productImg: "product3.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 15,
+        date: "2024-04-01",
+      },
+      {
+        id: 4,
+        product: "Product 4",
+        productImg: "product4.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 10,
+        date: "2024-04-01",
+      },
+    ],
   },
   {
     id: 4,
@@ -308,10 +384,45 @@ store.customers = [
     email: "jane.smith@example.com",
     purchase: 8,
     lifetime: "$300",
+    website: "robot.co",
     change: -5.0,
     comments: 10,
     likes: 15,
     avatar: avatar4,
+    purchaseHistory: [
+      {
+        id: 1,
+        product: "Product 1",
+        productImg: "product1.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 50,
+        date: "2024-04-01",
+      },
+      {
+        id: 2,
+        product: "Product 2",
+        productImg: "product2.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 35,
+        date: "2024-04-01",
+      },
+      {
+        id: 3,
+        product: "Product 3",
+        productImg: "product3.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 15,
+        date: "2024-04-01",
+      },
+      {
+        id: 4,
+        product: "Product 4",
+        productImg: "product4.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 10,
+        date: "2024-04-01",
+      },
+    ],
   },
   {
     id: 5,
@@ -320,10 +431,45 @@ store.customers = [
     email: "alice.johnson@example.com",
     purchase: 3,
     lifetime: "$150",
+    website: "robot.co",
     change: 0.0,
     comments: 5,
     likes: 7,
     avatar: avatar5,
+    purchaseHistory: [
+      {
+        id: 1,
+        product: "Product 1",
+        productImg: "product1.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 50,
+        date: "2024-04-01",
+      },
+      {
+        id: 2,
+        product: "Product 2",
+        productImg: "product2.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 35,
+        date: "2024-04-01",
+      },
+      {
+        id: 3,
+        product: "Product 3",
+        productImg: "product3.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 15,
+        date: "2024-04-01",
+      },
+      {
+        id: 4,
+        product: "Product 4",
+        productImg: "product4.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 10,
+        date: "2024-04-01",
+      },
+    ],
   },
   {
     id: 6,
@@ -332,10 +478,45 @@ store.customers = [
     email: "robert.brown@example.com",
     purchase: 10,
     lifetime: "$600",
+    website: "robot.co",
     change: 20.0,
     comments: 18,
     likes: 25,
     avatar: avatar5,
+    purchaseHistory: [
+      {
+        id: 1,
+        product: "Product 1",
+        productImg: "product1.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 50,
+        date: "2024-04-01",
+      },
+      {
+        id: 2,
+        product: "Product 2",
+        productImg: "product2.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 35,
+        date: "2024-04-01",
+      },
+      {
+        id: 3,
+        product: "Product 3",
+        productImg: "product3.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 15,
+        date: "2024-04-01",
+      },
+      {
+        id: 4,
+        product: "Product 4",
+        productImg: "product4.jpeg",
+        productLink: "ui8.net/product/product-link",
+        price: 10,
+        date: "2024-04-01",
+      },
+    ],
   },
 ];
 
@@ -488,8 +669,7 @@ button.absolute {
 }
 .arrow-icon {
   position: absolute;
-    top: 18px;
-    right: 21px; 
+  top: 18px;
+  right: 21px;
 }
-
 </style>
