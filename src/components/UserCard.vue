@@ -1,5 +1,9 @@
 <template>
-  <div class="user-card p-4 bg-white rounded-lg shadow-md">
+  <div class="user-card p-4 bg-white rounded-lg shadow-md relative">
+    <button @click="$emit('closeCard')" class="close-button bg-gray-200 text-gray-600 hover:text-gray-800 z-10">
+    <i class="fas fa-times"></i>
+</button>
+
     <div class="flex items-center mb-4">
       <img :src="user.avatar" alt="avatar" class="w-16 h-16 rounded-full mr-4" />
       <div>
@@ -57,7 +61,7 @@
 </template>
 
 <script setup>
-import {defineProps, ref } from 'vue';
+import { defineProps, ref } from 'vue';
 
 const props = defineProps({
   user: {
@@ -66,7 +70,6 @@ const props = defineProps({
   },
 });
 
-console.log(props);
 const privateNote = ref('');
 const loadingMore = ref(false);
 
@@ -77,6 +80,8 @@ const loadMore = () => {
     loadingMore.value = false;
   }, 2000);
 };
+
+
 </script>
 
 <style scoped>
@@ -86,6 +91,7 @@ const loadMore = () => {
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .user-card img {
@@ -131,5 +137,18 @@ const loadMore = () => {
   100% {
     transform: rotate(360deg);
   }
+}
+.close-button {
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  z-index: 100;
 }
 </style>
