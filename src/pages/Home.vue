@@ -103,7 +103,10 @@
                 :key="customer.id"
                 :class="{ 'border-t': isTopBorder, 'border-b': !isTopBorder }"
               >
-                <td class="p-2 hide-below-900">
+                <td
+                  class="p-2 hide-below-900"
+                  :class="{ 'bg-gray-100 ': isUserCardVisible && isSelected(customer) }"
+                >
                   <input
                     type="checkbox"
                     class="checkbox__tick"
@@ -111,7 +114,10 @@
                     v-model="selectedCustomers"
                   />
                 </td>
-                <td class="px-4 py-2 flex items-center">
+                <td
+                  class="p-2 flex items-center relative"
+                  :class="{ 'bg-gray-100':isUserCardVisible && isSelected(customer) }"
+                >
                   <img
                     :src="customer.avatar"
                     alt="avatar"
@@ -127,7 +133,24 @@
                     <div class="text-sm text-gray-500">
                       {{ customer.username }}
                     </div>
+                    
                   </div>
+                  <div v-if="isUserCardVisible && isSelected(customer)" :class="{ 'arrow-icon': isSelected(customer) }">
+                      <svg
+                        class="w-6 h-6 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
                 </td>
                 <td
                   v-if="!isUserCardVisible"
@@ -213,11 +236,46 @@ store.customers = [
     username: "@chelsie",
     email: "chelsie@ui8.net",
     purchase: 4,
+    website: "robot.co",
     lifetime: "$384",
     change: -12.8,
     comments: 8,
     likes: 16,
     avatar: avatar1,
+    purchaseHistory: [
+    {
+      id: 1,
+      product: "Product 1",
+      productImg:"temp.jpg",
+      productLink:"ui8.net/product/product-link",
+      price: 50,
+      date: "2024-05-01"
+    },
+    {
+      id: 2,
+      product: "Product 2",
+      productImg:"temp2.jpg",
+      productLink:"ui8.net/product/product-link",
+      price: 350,
+      date: "2024-05-01"
+    },
+    {
+      id: 3,
+      product: "Product 3",
+      productImg:"temp3.jpg",
+      productLink:"ui8.net/product/product-link",
+      price: 150,
+      date: "2024-05-01"
+    },
+    {
+      id: 4,
+      product: "Product 4",
+      productImg:"temp3.jpg",
+      productLink:"ui8.net/product/product-link",
+      price: 10,
+      date: "2024-05-01"
+    },
+  ]
   },
   {
     id: 2,
@@ -312,6 +370,9 @@ const showUserCard = (customer) => {
   selectedUser.value = customer;
   userCardVisible.value = true;
   isUserCardVisible.value = true;
+};
+const isSelected = (customer) => {
+  return customer === selectedUser.value;
 };
 
 const toggleActive = () => {
@@ -415,7 +476,7 @@ input[type="text"]:focus {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  border: 3px solid rgba(111, 118, 126, 0.4);
+  border: 1px solid rgba(111, 118, 126, 0.4);
   transition: all 0.2s;
 }
 
@@ -425,4 +486,10 @@ button.absolute {
 .w-half {
   width: 50%;
 }
+.arrow-icon {
+  position: absolute;
+    top: 18px;
+    right: 21px; 
+}
+
 </style>
