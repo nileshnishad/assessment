@@ -4,7 +4,7 @@
       @click="$emit('closeCard')"
       class="close-button bg-gray-200 text-gray-600 hover:text-gray-800 z-10"
     >
-      <i class="fas fa-times"></i>
+      <i class="fas fa-times rotate-on-hover"></i>
     </button>
 
     <div class="flex md:flex-row flex-col mb-4 justify-between">
@@ -20,17 +20,17 @@
         </div>
       </div>
       <div class="flex justify-between items-center mb-4">
-        <button class="bg-blue-500 w-half text-white px-4 py-2 mr-1 rounded-md">
-          Follow
-        </button>
-        <button class="bg-blue-500 w-half text-white px-4 py-2 rounded-md">
-          Message
-        </button>
+        <BaseButton class="bg-blue-500 w-half text-white px-4 py-2 mr-1 rounded-md">
+          Follow  <i class="fa fa-plus pl-1"></i>
+        </BaseButton>
+        <BaseButton class="bg-blue-500 w-half text-white px-4 py-2 rounded-md">
+          Message  <i class="fa fa-commenting pl-1"></i>
+        </BaseButton>
       </div>
     </div>
 
     <div class="mb-4">
-      <h3 class="text-14x">Private note <i class="fa-solid fa-circle-info"></i></h3>
+      <h3 class="text-14x">Private note <i class="fa-solid fa-circle-info tooltip" data-tooltip="Description private note"></i></h3>
       <div class="quill-editor-container">
         <quill-editor
           v-model="privateNote"
@@ -68,7 +68,7 @@
     </div>
     <div class="my-4">
       <h4 class="text-14x">
-        Purchase history <i class="fa-solid fa-circle-info"></i>
+        Purchase history <i class="fa-solid fa-circle-info tooltip" data-tooltip="Description purchase history"></i>
       </h4>
       <table class="min-w-full bg-white rounded-lg">
         <thead>
@@ -117,6 +117,7 @@
 <script setup>
 import { defineProps, ref } from "vue";
 import { formatDate } from '../utils/formatDate';
+import BaseButton from '../components/common/BaseButton';
 
 const props = defineProps({
   user: {
@@ -151,7 +152,6 @@ const getAvtar = (imageName) =>{
   return requireAvtar(`./${imageName}`);
 }
 </script>
-
 
 <style scoped>
 .user-card {
@@ -215,10 +215,45 @@ const getAvtar = (imageName) =>{
 }
 .social-icon {
   padding: 0 5px;
-  font-size: 18px; /* Adjust the size as needed */
+  font-size: 18px; 
 }
 
 .clickable {
   cursor: pointer;
+}
+.rotate-on-hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate-on-hover:hover {
+  transform: rotate(180deg);
+}
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  text-transform: none !important;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: 125%; 
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  font-size: 8px;
+  font-variant: small-caps;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1000;
+  text-transform: none !important;
+}
+.tooltip:hover::after {
+  opacity: 1;
 }
 </style>

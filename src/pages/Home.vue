@@ -44,7 +44,7 @@
               class="px-4 text-15x md:w-auto w-half rounded-md"
             >
               Active
-            </button>
+          </button>
             <button
               @click="toggleNew"
               :class="{ 'bg-gray-200': newSelected }"
@@ -229,7 +229,6 @@ import { ref, computed, onMounted } from "vue";
 import { useUserDataStore } from "../store/index.js";
 import UserCard from "../components/UserCard.vue";
 
-
 // Reactive properties
 const customers = computed(() => store.customers);
 const selectedCustomers = ref([]);
@@ -358,7 +357,7 @@ input[type="text"]:focus {
 }
 
 .text-gray-600 {
-  color: #4b5563; /* Adjust this color to match your desired text color */
+  color: #4b5563;
 }
 
 .font-bold {
