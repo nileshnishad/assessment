@@ -10,13 +10,13 @@
     <div class="flex md:flex-row flex-col mb-4 justify-between">
       <div class="flex">
         <img
-          :src="user.avatar"
+          :src="getAvtar(user.avatar)"
           alt="avatar"
           class="w-16 h-16 rounded-full mr-4"
         />
         <div>
-          <h2 class="text-2xl font-bold">{{ user.name }}</h2>
-          <p class="text-gray-600">{{ user.username }}</p>
+          <h2 class="text-20x">{{ user.name }}</h2>
+          <p class="text-12x">{{ user.username }}</p>
         </div>
       </div>
       <div class="flex justify-between items-center mb-4">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="mb-4">
-      <h3 class="text-lg font-semibold">Private note</h3>
+      <h3 class="text-14x">Private note <i class="fa-solid fa-circle-info"></i></h3>
       <div class="quill-editor-container">
         <quill-editor
           v-model="privateNote"
@@ -41,7 +41,7 @@
     </div>
     <div class="my-4">
       <p class="flex items-center">
-        <i class="fas fa-envelope mr-2 social-icon"></i>{{ user.email }}
+        <i class="fas fa-envelope text-14x mr-2 social-icon"></i>{{ user.email }}
       </p>
     </div>
     <hr class="my-4 border-t border-gray-200" />
@@ -67,15 +67,15 @@
       </p>
     </div>
     <div class="my-4">
-      <h4 class="text-lg">
+      <h4 class="text-14x">
         Purchase history <i class="fa-solid fa-circle-info"></i>
       </h4>
       <table class="min-w-full bg-white rounded-lg">
         <thead>
           <tr>
-            <th class="text-left zero-less">Product</th>
-            <th class="px-4 py-2 text-left">Price</th>
-            <th class="px-4 py-2 text-left">Date</th>
+            <th class="text-left text-12x zero-less">Product</th>
+            <th class="px-4 py-2 text-12x text-left">Price</th>
+            <th class="px-4 py-2 text-12x text-left">Date</th>
           </tr>
         </thead>
         <tbody>
@@ -91,20 +91,20 @@
                 class="w-10 h-10 mr-2 rounded"
               />
               <div>
-                <div class="font-semibold">
+                <div class="text-15x">
                   {{ item.product }}
                 </div>
-                <div class="text-sm text-gray-500">
+                <div class="text-13x text-gray-500">
                   {{ item.productLink }}
                 </div>
               </div>
             </td>
             <td class="px-4 py-2 text-left">
-              <div class="bg-b5e4ca p-2 float-left rounded">
+              <div class="bg-b5e4ca text-14x p-2 float-left rounded">
                 ${{ item.price }}
               </div>
             </td>
-            <td class="px-4 py-2 text-left">
+            <td class="px-4 py-2 text-14x text-left">
               {{ formatDate(item.date) }}
             </td>
           </tr>
@@ -146,6 +146,10 @@ const requireContext = require.context('@/assets/images/product', false, /\.(png
 const getImageUrl = (imageName) => {
   return requireContext(`./${imageName}`);
 };
+const requireAvtar = require.context('@/assets/images', false, /\.(png|jpe?g|svg)$/);
+const getAvtar = (imageName) =>{
+  return requireAvtar(`./${imageName}`);
+}
 </script>
 
 
@@ -206,7 +210,6 @@ const getImageUrl = (imageName) => {
   overflow: hidden;
   border: 0.5px solid gray;
 }
-
 .zero-less {
   padding: 0 !important;
 }

@@ -6,9 +6,9 @@
       class="p-4 bg-white rounded"
     >
       <div class="flex flex-col md:flex-row mb-4 justify-between">
-        <div class="flex mb-2 md:mb-0">
-          <div class="w-3 h-6 bg-cabdff rounded"></div>
-          <h6 class="text-xl font-semibold px-4">Customer</h6>
+        <div class="flex mb-2 md:mb-0 items-center">
+          <div class="w-4 h-7 bg-cabdff rounded"></div>
+          <h6 class="px-4 text-20x">Customer</h6>
           <div class="relative flex items-center flex-grow md:ml-4">
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -41,14 +41,14 @@
             <button
               @click="toggleActive"
               :class="{ 'bg-gray-200': activeSelected }"
-              class="px-4 py-2 md:w-auto w-half rounded-md"
+              class="px-4 text-15x md:w-auto w-half rounded-md"
             >
               Active
             </button>
             <button
               @click="toggleNew"
               :class="{ 'bg-gray-200': newSelected }"
-              class="px-4 py-2 md:w-auto w-half rounded-md"
+              class="px-4 text-15x md:w-auto w-half rounded-md"
             >
               New
             </button>
@@ -89,12 +89,12 @@
                     :checked="areAllSelected"
                   />
                 </th>
-                <th class="px-4 py-2">Name</th>
-                <th v-if="!isUserCardVisible" class="px-4 py-2">Email</th>
-                <th v-if="!isUserCardVisible" class="px-4 py-2">Purchase</th>
-                <th v-if="!isUserCardVisible" class="px-4 py-2">Lifetime</th>
-                <th v-if="!isUserCardVisible" class="px-4 py-2">Comments</th>
-                <th v-if="!isUserCardVisible" class="px-4 py-2">Likes</th>
+                <th class="px-4 py-2 text-12x">Name</th>
+                <th v-if="!isUserCardVisible" class="px-4 py-2 text-12x">Email</th>
+                <th v-if="!isUserCardVisible" class="px-4 py-2 text-12x">Purchase</th>
+                <th v-if="!isUserCardVisible" class="px-4 py-2 text-12x">Lifetime</th>
+                <th v-if="!isUserCardVisible" class="px-4 py-2 text-12x">Comments</th>
+                <th v-if="!isUserCardVisible" class="px-4 py-2 text-12x">Likes</th>
               </tr>
             </thead>
             <tbody>
@@ -123,18 +123,18 @@
                   }"
                 >
                   <img
-                    :src="customer.avatar"
+                    :src="getImageUrl(customer.avatar)"
                     alt="avatar"
                     class="w-10 h-10 rounded-full mr-2"
                   />
                   <div>
                     <div
-                      class="font-semibold clickable hover:text-primary"
+                      class="text-15x clickable hover:text-primary "
                       @click="showUserCard(customer)"
                     >
                       {{ customer.name }}
                     </div>
-                    <div class="text-sm text-gray-500">
+                    <div class="text-13x">
                       {{ customer.username }}
                     </div>
                   </div>
@@ -160,19 +160,20 @@
                 </td>
                 <td
                   v-if="!isUserCardVisible"
-                  class="px-4 py-2 hide-below-900 text-gray-600"
+                  class="px-4 py-2 text-14x hide-below-900 text-gray-600"
                 >
                   {{ customer.email }}
                 </td>
                 <td
                   v-if="!isUserCardVisible"
-                  class="px-4 py-2 hide-below-900 text-gray-600"
+                  class="px-4 py-2 text-14x hide-below-900 "
                 >
-                  {{ customer.purchase }}
+                <div class="bg-b5e4ca text-style float-left rounded"> {{ customer.purchase }}</div>
+                  
                 </td>
                 <td
                   v-if="!isUserCardVisible"
-                  class="px-4 py-2 align-right-lifetime text-gray-600"
+                  class="px-4 py-2 text-15x align-right-lifetime text-gray-600"
                 >
                   {{ customer.lifetime }}
                   <span
@@ -186,13 +187,13 @@
                 </td>
                 <td
                   v-if="!isUserCardVisible"
-                  class="px-4 py-2 hide-below-900 text-gray-600"
+                  class="px-4 py-2 text-15x hide-below-900 text-gray-600"
                 >
                   {{ customer.comments }}
                 </td>
                 <td
                   v-if="!isUserCardVisible"
-                  class="px-4 py-2 hide-below-900 text-gray-600"
+                  class="px-4 py-2 text-15x hide-below-900 text-gray-600"
                 >
                   {{ customer.likes }}
                 </td>
@@ -227,298 +228,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useUserDataStore } from "../store/index.js";
 import UserCard from "../components/UserCard.vue";
-import avatar1 from "@/assets/images/avatar-1.jpg";
-import avatar2 from "@/assets/images/avatar-2.jpg";
-import avatar3 from "@/assets/images/avatar-3.jpg";
-import avatar4 from "@/assets/images/avatar-4.jpg";
-import avatar5 from "@/assets/images/avatar-5.jpg";
 
-// Example customers data
-const store = useUserDataStore();
-store.customers = [
-  {
-    id: 1,
-    name: "Chelsie Haley",
-    username: "@chelsie",
-    email: "chelsie@ui8.net",
-    purchase: 4,
-    website: "robot.co",
-    lifetime: "$384",
-    change: -12.8,
-    comments: 8,
-    likes: 16,
-    avatar: avatar1,
-    purchaseHistory: [
-      {
-        id: 1,
-        product: "Product 1",
-        productImg: "product1.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 50,
-        date: "2024-04-01",
-      },
-      {
-        id: 2,
-        product: "Product 2",
-        productImg: "product2.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 35,
-        date: "2024-04-01",
-      },
-      {
-        id: 3,
-        product: "Product 3",
-        productImg: "product3.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 15,
-        date: "2024-04-01",
-      },
-      {
-        id: 4,
-        product: "Product 4",
-        productImg: "product4.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 10,
-        date: "2024-04-01",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Filomena Fahey",
-    username: "@filomena",
-    email: "fahey.designer@robot.co",
-    purchase: 12,
-    lifetime: "$223",
-    website: "robot.co",
-    change: 2.8,
-    comments: 14,
-    likes: 6,
-    avatar: avatar2,
-    purchaseHistory: [
-      {
-        id: 1,
-        product: "Product 1",
-        productImg: "product1.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 50,
-        date: "2024-04-01",
-      },
-      {
-        id: 2,
-        product: "Product 2",
-        productImg: "product2.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 35,
-        date: "2024-04-01",
-      },
-      {
-        id: 3,
-        product: "Product 3",
-        productImg: "product3.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 15,
-        date: "2024-04-01",
-      },
-      {
-        id: 4,
-        product: "Product 4",
-        productImg: "product4.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 10,
-        date: "2024-04-01",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "John Doe",
-    username: "@john",
-    email: "john.doe@example.com",
-    purchase: 5,
-    lifetime: "$500",
-    website: "robot.co",
-    change: 10.5,
-    comments: 12,
-    likes: 20,
-    avatar: avatar3,
-    purchaseHistory: [
-      {
-        id: 1,
-        product: "Product 1",
-        productImg: "product1.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 50,
-        date: "2024-04-01",
-      },
-      {
-        id: 2,
-        product: "Product 2",
-        productImg: "product2.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 35,
-        date: "2024-04-01",
-      },
-      {
-        id: 3,
-        product: "Product 3",
-        productImg: "product3.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 15,
-        date: "2024-04-01",
-      },
-      {
-        id: 4,
-        product: "Product 4",
-        productImg: "product4.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 10,
-        date: "2024-04-01",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "Jane Smith",
-    username: "@jane",
-    email: "jane.smith@example.com",
-    purchase: 8,
-    lifetime: "$300",
-    website: "robot.co",
-    change: -5.0,
-    comments: 10,
-    likes: 15,
-    avatar: avatar4,
-    purchaseHistory: [
-      {
-        id: 1,
-        product: "Product 1",
-        productImg: "product1.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 50,
-        date: "2024-04-01",
-      },
-      {
-        id: 2,
-        product: "Product 2",
-        productImg: "product2.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 35,
-        date: "2024-04-01",
-      },
-      {
-        id: 3,
-        product: "Product 3",
-        productImg: "product3.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 15,
-        date: "2024-04-01",
-      },
-      {
-        id: 4,
-        product: "Product 4",
-        productImg: "product4.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 10,
-        date: "2024-04-01",
-      },
-    ],
-  },
-  {
-    id: 5,
-    name: "Alice Johnson",
-    username: "@alice",
-    email: "alice.johnson@example.com",
-    purchase: 3,
-    lifetime: "$150",
-    website: "robot.co",
-    change: 0.0,
-    comments: 5,
-    likes: 7,
-    avatar: avatar5,
-    purchaseHistory: [
-      {
-        id: 1,
-        product: "Product 1",
-        productImg: "product1.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 50,
-        date: "2024-04-01",
-      },
-      {
-        id: 2,
-        product: "Product 2",
-        productImg: "product2.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 35,
-        date: "2024-04-01",
-      },
-      {
-        id: 3,
-        product: "Product 3",
-        productImg: "product3.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 15,
-        date: "2024-04-01",
-      },
-      {
-        id: 4,
-        product: "Product 4",
-        productImg: "product4.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 10,
-        date: "2024-04-01",
-      },
-    ],
-  },
-  {
-    id: 6,
-    name: "Robert Brown",
-    username: "@robert",
-    email: "robert.brown@example.com",
-    purchase: 10,
-    lifetime: "$600",
-    website: "robot.co",
-    change: 20.0,
-    comments: 18,
-    likes: 25,
-    avatar: avatar5,
-    purchaseHistory: [
-      {
-        id: 1,
-        product: "Product 1",
-        productImg: "product1.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 50,
-        date: "2024-04-01",
-      },
-      {
-        id: 2,
-        product: "Product 2",
-        productImg: "product2.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 35,
-        date: "2024-04-01",
-      },
-      {
-        id: 3,
-        product: "Product 3",
-        productImg: "product3.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 15,
-        date: "2024-04-01",
-      },
-      {
-        id: 4,
-        product: "Product 4",
-        productImg: "product4.jpeg",
-        productLink: "ui8.net/product/product-link",
-        price: 10,
-        date: "2024-04-01",
-      },
-    ],
-  },
-];
 
 // Reactive properties
 const customers = computed(() => store.customers);
@@ -530,8 +240,10 @@ const activeSelected = ref(true);
 const newSelected = ref(false);
 const isUserCardVisible = ref(false);
 const isLargeScreen = ref(window.innerWidth > 1024);
+const store = useUserDataStore();
 
 onMounted(() => {
+  store.getCustomers();
   window.addEventListener("resize", handleResize);
 });
 
@@ -540,12 +252,16 @@ const handleResize = () => {
 };
 
 const filteredCustomers = computed(() => {
+  const query = searchQuery.value.toLowerCase();
   return customers.value.filter(
     (customer) =>
-      customer.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      customer.email.toLowerCase().includes(searchQuery.value.toLowerCase())
+      customer.name.toLowerCase().includes(query) ||
+      customer.email.toLowerCase().includes(query)
   );
 });
+const filterCustomers = () => {
+  searchQuery.value = "";
+};
 
 const showUserCard = (customer) => {
   selectedUser.value = customer;
@@ -592,8 +308,9 @@ const handleDeselectAll = () => {
   selectedCustomers.value = [];
 };
 
-const filterCustomers = () => {
-  // No-op because filteredCustomers is a computed property
+const requireContext = require.context('@/assets/images', false, /\.(png|jpe?g|svg)$/);
+const getImageUrl = (imageName) => {
+  return requireContext(`./${imageName}`);
 };
 </script>
 
@@ -654,10 +371,10 @@ input[type="text"]:focus {
 
 .checkbox__tick {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 10px;
-  border: 1px solid rgba(111, 118, 126, 0.4);
+  border: 2px solid rgba(111, 118, 126, 0.4);
   transition: all 0.2s;
 }
 
@@ -671,5 +388,13 @@ button.absolute {
   position: absolute;
   top: 18px;
   right: 21px;
+}
+.text-style{
+  display: inline-block;
+    padding: 0 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 700;
 }
 </style>

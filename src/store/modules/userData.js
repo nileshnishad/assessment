@@ -1,19 +1,28 @@
+import { fetchCustomers } from '@/api/api';
 import { defineStore } from 'pinia';
 
 export const useUserDataStore = defineStore('userData', {
   state: () => ({
-    count: 0,
     customers: [],
+    loading: false,
+    error: null,
     name:"nilesh"
   }),
   getters: {
-    doubleCount(state) {
-      return state.count * 2;
-    },
+    
   },
   actions: {
-    increment() {
-      this.count++;
+    async getCustomers() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const customers = await fetchCustomers();
+        this.setCustomers(customers);
+      } catch (error) {
+        this.error = 'Failed to load customers';
+      } finally {
+        this.loading = false;
+      }
     },
     setCustomers(customers) {
       this.customers = customers;
